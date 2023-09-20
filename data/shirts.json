@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Kemeja Premium Linen Biru",
+    "type": "Casual",
+    "size": "L",
+    "stock": 12,
+    "tagId": 1
+  },
+  {
+    "name": "Kemeja Broadcloth Extra Fine Cotton Motif",
+    "type": "Casual",
+    "size": "XL",
+    "stock": 6,
+    "tagId": 2
+  },
+  {
+    "name": "Kemeja Dry Easy Care Kerah",
+    "type": "Dress",
+    "size": "L",
+    "stock": 6,
+    "tagId": 3
+  },
+  {
+    "name": "T-Shirt Katun Crew Neck Lengan Pendek",
+    "type": "T-Shirt",
+    "size": "M",
+    "stock": 10,
+    "tagId": 4
+  },
+  {
+    "name": "Kaos Polo Dry-Ex Lengan Pendek",
+    "type": "Polo",
+    "size": "L",
+    "stock": 32,
+    "tagId": 1
+  }
+]
