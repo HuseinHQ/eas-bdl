@@ -13,6 +13,12 @@
   </div>
 
   <div class="container mt-5">
+    <% if (errors) { %>
+    <div class="alert alert-danger text-danger">
+      <%= errors.split(',').join(', ') %>
+    </div>
+    <% } %>
+
     <form action="/shirts/add" method="post">
       <div class="mb-3">
         <label for="name">Name</label>
@@ -49,6 +55,7 @@
       <div class="mb-3">
         <label for="TagId">Tag</label>
         <select class="form-select" name="TagId">
+          <option selected disabled>-- Select Tag --</option>
           <% tags.forEach(tag => { %>
             <option value="<%= tag.id %>"><%= tag.name %></option>
           <% }) %>

@@ -105,7 +105,8 @@ class Model {
       else {
         if(stock == 0) {
           pool.query(query, err => {
-            cb(err);
+            if(err) cb(err);
+            else cb(null, {name: 'delete', msg: `Shirt with id "${id}" has been deleted!`})
           })
         } else {
           cb(null, {name: 'delete', msg: 'You can only delete shirt with stock 0'})
@@ -122,7 +123,7 @@ class Model {
     if(!type) errors.push('Type must be filled');
     if(!size) errors.push('Size must be filled');
     if(!stock) errors.push('Stock must be filled');
-    if(stock < 0 && stock > 100) errors.push('Stock must be between 0 and 100');
+    if(stock > 100 || stock < 0) errors.push('Stock must between 0 and 100');
     if(!TagId) errors.push('Tag must be filled');
 
     return errors;

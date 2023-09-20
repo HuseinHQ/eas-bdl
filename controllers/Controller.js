@@ -3,14 +3,24 @@ const Model = require('../models/Model');
 
 class Controller {
   static listPage(req, res) {
+    const info = req.query.info;
     Model.getShirts((err, shirts) => {
       if(err) res.send(err);
-      else res.render('home', {shirts});
+      else res.render('home', {shirts, info});
     });
   };
 
   static addPage(req, res) {
+    const errors = req.query.err;
     Model.getTags((err, tags) => {
+      if(err) res.send(err);
+      else res.render('add', {tags, errors});
+    });
+  };
+
+  static addPagePost(req, res) {
+    const shirt = req.body;
+    Model.postShirts(shirt, err => {
       if(err) {
         if(err.name === 'ValidationError') {
           res.redirect(`/shirts/add?err=${err.errors}`);
@@ -18,14 +28,6 @@ class Controller {
           res.send(err);
         }
       }
-      else res.render('add', {tags});
-    });
-  };
-
-  static addPagePost(req, res) {
-    const shirt = req.body;
-    Model.postShirts(shirt, err => {
-      if(err) res.send(err);
       else res.redirect('/');
     });
   };
@@ -60,9 +62,15 @@ class Controller {
 
   static deleteShirt(req, res) {
     const id = req.params.id;
-    Model.deleteShirt(id, err => {
+    Model.deleteShirt(id, (err, data) => {
       if(err) res.send(err);
-      else res.redirect('/');
+      else {
+        if(data.name === 'delete') {
+          res.redirect(`/?info=${data.msg}`)
+        } else {
+          res.redirect('/');
+        }
+      }
     })
   }
 };
