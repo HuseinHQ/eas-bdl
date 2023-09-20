@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shirt List</title>
+</head>
+<body>
+  <button onclick="window.location.href='/shirts/add'">Add new shirt</button>
+
+  <table>
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Size</th>
+      <th>Stock</th>
+      <th>Tag</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% shirts.forEach(shirt => { %>
+        <tr>
+          <td><%= shirt.id %></td>
+          <td><%= shirt.name %></td>
+          <td><%= shirt.type %></td>
+          <td><%= shirt.size %></td>
+          <td><%= shirt.stock %></td>
+          <td><%= shirt.tagName %></td>
+          <td>
+            <button onclick="window.location.href='/shirts/increase-stock/<%= shirt.id %>'">+ stock</button>
+            <button onclick="window.location.href='/shirts/decrease-stock/<%= shirt.id %>'">- stock</button>
+            <button onclick="window.location.href='/shirts/delete/<%= shirt.id %>'">Delete</button>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

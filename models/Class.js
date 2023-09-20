@@ -16,3 +16,5 @@ class Shirt {
     this.tagName = tagName;
   };
 };
+
+module.exports = { Tag, Shirt };

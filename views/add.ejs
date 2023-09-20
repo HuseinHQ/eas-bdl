@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Shirt</title>
+</head>
+<body>
+  <form action="/shirts/add" method="post">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" placeholder="e.g: Kaos Polo Garis">
+    </div>
+
+    <div>
+      <label for="type">Type</label>
+      <select name="type">
+        <option selected disabled>-- Select Type --</option>
+        <option value="Casual">Casual</option>
+        <option value="Dres">Dress</option>
+        <option value="T-Shirt">T-Shirt</option>
+        <option value="Polo">Polo</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="size">Size</label>
+      <select name="size">
+        <option selected disabled>-- Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="stock">Stock</label>
+      <input type="number" name="stock" placeholder="e.g: 12">
+    </div>
+
+    <div>
+      <label for="TagId">Tag</label>
+      <select name="TagId">
+        <% tags.forEach(tag => { %>
+          <option value="<%= tag.id %>"><%= tag.name %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <button type="submit">Add Shirt</button>
+  </form>
+</body>
+</html>
