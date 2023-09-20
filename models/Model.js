@@ -34,7 +34,7 @@ class Model {
     const { name, type, size, stock, TagId } = shirt;
     const errors = this.formValidation(name, type, size, stock, TagId);
 
-    if(errors.length) return cb({err: 'ValidationError', errors});
+    if(errors.length) return cb({name: 'ValidationError', errors});
 
     const query = `
     INSERT INTO "Shirts" ("name", "type", "size", "stock", "TagId")
@@ -69,9 +69,7 @@ class Model {
       else {
         const stock = res.rows[0].stock;
         if(stock == 0 && tag === 'decrease') {
-          cb({name: 'stock', msg: 'stock is empty'});
-        } else if (stock == 100 && tag === 'increase') {
-          cb({name: 'stock', msg: 'stock is full'});
+          cb({name: 'stock', msg: 'stock is minimal 0'});
         } else {
           pool.query(updateStock, err => {
             cb(err);
@@ -110,7 +108,7 @@ class Model {
             cb(err);
           })
         } else {
-          cb(null, {name: 'delete', msg: 'Cannot delete shirt because stock is still available'})
+          cb(null, {name: 'delete', msg: 'You can only delete shirt with stock 0'})
         }
       }
     })

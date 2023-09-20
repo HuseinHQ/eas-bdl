@@ -9,9 +9,15 @@
 <body>
   <%- include('_navbar') %>
 
-  <div class="container">
+  <!-- HERO -->
+  <div class="px-3 py-5 text-center bg-danger">
+    <h1 class="display-6 fw-bold text-white">List of Shirts</h1>
+  </div>
+
+  <!-- TABLE -->
+  <div class="container mt-3">
     <button class="btn btn-primary" onclick="window.location.href='/shirts/add'">Add new shirt</button>
-    <table class="table">
+    <table class="table mt-3">
       <thead>
         <th>Id</th>
         <th>Name</th>
@@ -31,8 +37,8 @@
             <td><%= shirt.stock %></td>
             <td><%= shirt.tagName %></td>
             <td>
-              <button class="btn btn-primary  " onclick="window.location.href='/shirts/increase-stock/<%= shirt.id %>'">+ stock</button>
-              <button class="btn btn-primary  " onclick="window.location.href='/shirts/decrease-stock/<%= shirt.id %>'">- stock</button>
+              <button class="btn btn-success" onclick="window.location.href='/shirts/increase-stock/<%= shirt.id %>'">+ stock</button>
+              <button class="btn btn-warning" onclick="window.location.href='/shirts/decrease-stock/<%= shirt.id %>'">- stock</button>
               <button class="btn btn-danger" onclick="window.location.href='/shirts/delete/<%= shirt.id %>'">Delete</button>
             </td>
           </tr>

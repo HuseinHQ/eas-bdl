@@ -11,7 +11,13 @@ class Controller {
 
   static addPage(req, res) {
     Model.getTags((err, tags) => {
-      if(err) res.send(err);
+      if(err) {
+        if(err.name === 'ValidationError') {
+          res.redirect(`/shirts/add?err=${err.errors}`);
+        } else {
+          res.send(err);
+        }
+      }
       else res.render('add', {tags});
     });
   };
