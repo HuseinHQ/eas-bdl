@@ -32,6 +32,9 @@ class Model {
 
   static postShirts(shirt, cb) {
     const { name, type, size, stock, TagId } = shirt;
+    const errors = this.formValidation(name, type, size, stock, TagId);
+
+    if(errors.length) return cb({err: 'ValidationError', errors});
 
     const query = `
     INSERT INTO "Shirts" ("name", "type", "size", "stock", "TagId")
@@ -78,15 +81,53 @@ class Model {
     });
   };
 
-  static getStock(cb) {
-    const getStock = `
+  static getStock(id, cb) {
+    const query = `
       SELECT "stock" FROM "Shirts"
       WHERE id = ${+id}
     `
+
+    pool.query(query, (err, res) => {
+      if(err) cb(err);
+      else {
+        const stock = res.rows[0].stock;
+        cb(null, stock);
+      }
+    })
   }
 
   static deleteShirt(id, cb) {
+    const query = `
+      DELETE FROM "Shirts"
+      WHERE id = ${+id}
+    `;
+
+    this.getStock(id, (err, stock) => {
+      if(err) cb(err);
+      else {
+        if(stock == 0) {
+          pool.query(query, err => {
+            cb(err);
+          })
+        } else {
+          cb(null, {name: 'delete', msg: 'Cannot delete shirt because stock is still available'})
+        }
+      }
+    })
+  }
+
+  static formValidation(name, type, size, stock, TagId) {
+    const errors = []
     
+    if(!name) errors.push('Name must be filled');
+    if(name.split(" ").length < 2) errors.push('Name must contain minmimal 2 words');
+    if(!type) errors.push('Type must be filled');
+    if(!size) errors.push('Size must be filled');
+    if(!stock) errors.push('Stock must be filled');
+    if(stock < 0 && stock > 100) errors.push('Stock must be between 0 and 100');
+    if(!TagId) errors.push('Tag must be filled');
+
+    return errors;
   }
 };
 
