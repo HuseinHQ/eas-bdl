@@ -50,11 +50,15 @@ class Karyawan {
     }
   }
 
-  static create({ nama, posisi, nomor_telepon, gaji }) {
-    return this.pool.query(
-      'INSERT INTO "Karyawan" (nama, posisi, tanggal_mulai, nomor_telepon, gaji) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [nama, posisi, new Date(), nomor_telepon, gaji]
-    );
+  static async create({ nama, posisi, nomor_telepon, gaji }) {
+    try {
+      return await this.pool.query(
+        'INSERT INTO "Karyawan" (nama, posisi, tanggal_mulai, nomor_telepon, gaji) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+        [nama, posisi, new Date(), nomor_telepon, gaji]
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
   static update(id, karyawan) {

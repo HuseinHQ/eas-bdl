@@ -22,7 +22,7 @@
       <div class="alert alert-danger text-danger"><%= errors.split(',').join(', ') %></div>
       <% } %>
 
-      <form action="/karyawan/<%= karyawan.id %>/edit" method="post">
+      <form action="/karyawan/<%= karyawan.id %>" method="post">
         <input type="hidden" name="id" value="<%= karyawan.id %>" />
         <input type="hidden" name="tanggal_mulai" value="<%= karyawan.tanggal_mulai %>" />
 
