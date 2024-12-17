@@ -1,0 +1,23 @@
+[
+  {
+    "nama": "Andi",
+    "posisi": "Kasir",
+    "tanggal_mulai": "2023-01-15",
+    "nomor_telepon": "08123456789",
+    "gaji": 4000000
+  },
+  {
+    "nama": "Budi",
+    "posisi": "Manager",
+    "tanggal_mulai": "2022-09-01",
+    "nomor_telepon": "08234567890",
+    "gaji": 7000000
+  },
+  {
+    "nama": "Citra",
+    "posisi": "Staff Gudang",
+    "tanggal_mulai": "2023-03-10",
+    "nomor_telepon": "08345678901",
+    "gaji": 3500000
+  }
+]

@@ -4,9 +4,9 @@ const pool = new Pool({
   user: 'postgres',
   password: 'postgres',
   host: 'localhost',
-  database: 'shirt-db',
+  database: 'electronic_shop',
   port: 5432,
-  idleTimeoutMillis: 500
-})
+  idleTimeoutMillis: 500,
+});
 
 module.exports = pool;

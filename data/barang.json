@@ -1,0 +1,32 @@
+[
+  {
+    "nama": "Smart TV 42 Inch 4K",
+    "id_kategori": 1,
+    "harga": 4500000,
+    "stok": 20
+  },
+  {
+    "nama": "Monitor LED 27 Inch",
+    "id_kategori": 1,
+    "harga": 3000000,
+    "stok": 18
+  },
+  {
+    "nama": "Vacuum Cleaner Otomatis",
+    "id_kategori": 2,
+    "harga": 1500000,
+    "stok": 25
+  },
+  {
+    "nama": "Air Purifier Portable",
+    "id_kategori": 2,
+    "harga": 1200000,
+    "stok": 22
+  },
+  {
+    "nama": "Xbox Series X",
+    "id_kategori": 3,
+    "harga": 9000000,
+    "stok": 40
+  }
+]

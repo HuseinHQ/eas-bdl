@@ -1,0 +1,27 @@
+[
+  {
+    "id_transaksi": 1,
+    "id_barang": 1,
+    "jumlah_barang": 2
+  },
+  {
+    "id_transaksi": 1,
+    "id_barang": 3,
+    "jumlah_barang": 1
+  },
+  {
+    "id_transaksi": 2,
+    "id_barang": 2,
+    "jumlah_barang": 1
+  },
+  {
+    "id_transaksi": 2,
+    "id_barang": 4,
+    "jumlah_barang": 3
+  },
+  {
+    "id_transaksi": 3,
+    "id_barang": 5,
+    "jumlah_barang": 10
+  }
+]
