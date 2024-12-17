@@ -2,6 +2,7 @@ const pool = require('../config/connection');
 
 class Karyawan {
   static pool = pool;
+  static posisi = ['Kasir', 'Manager', 'Staff Gudang'];
 
   constructor(id, nama, posisi, tanggal_mulai, nomor_telepon, gaji) {
     this.id = id;
@@ -32,14 +33,27 @@ class Karyawan {
     }
   }
 
-  static getById(id) {
-    return this.pool.query('SELECT * FROM "Karyawan" WHERE id = $1', [id]);
+  static async getById(id) {
+    try {
+      const result = await this.pool.query('SELECT * FROM "Karyawan" WHERE id = $1', [id]);
+      const karyawan = result.rows[0];
+      return new Karyawan(
+        karyawan.id,
+        karyawan.nama,
+        karyawan.posisi,
+        karyawan.tanggal_mulai,
+        karyawan.nomor_telepon,
+        karyawan.gaji
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
-  static create(karyawan) {
+  static create({ nama, posisi, nomor_telepon, gaji }) {
     return this.pool.query(
       'INSERT INTO "Karyawan" (nama, posisi, tanggal_mulai, nomor_telepon, gaji) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [karyawan.nama, karyawan.posisi, karyawan.tanggal_mulai, karyawan.nomor_telepon, karyawan.gaji]
+      [nama, posisi, new Date(), nomor_telepon, gaji]
     );
   }
 

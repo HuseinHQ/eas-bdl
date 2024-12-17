@@ -7,6 +7,10 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/karyawan', KaryawanController.listPage);
+app.get('/karyawan/add', KaryawanController.addPage);
+app.post('/karyawan/add', KaryawanController.addKaryawan);
+app.get('/karyawan/:id/edit', KaryawanController.editPage);
+app.post('/karyawan/:id/edit', KaryawanController.editKaryawan);
 // app.get('/', Controller.listPage);
 // app.get('/shirts/add', Controller.addPage);
 // app.post('/shirts/add', Controller.addPagePost);
