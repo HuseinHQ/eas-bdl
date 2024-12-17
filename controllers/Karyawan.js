@@ -1,4 +1,3 @@
-const pool = require('../config/connection');
 const formatDate = require('../helpers/formatDate');
 const formatRupiah = require('../helpers/formatRupiah');
 const Karyawan = require('../models/Karyawan');
