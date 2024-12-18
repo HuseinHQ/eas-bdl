@@ -13,21 +13,28 @@ class Karyawan {
     this.gaji = gaji;
   }
 
-  static async getAll() {
+  static async getAll({ gaji, nama, search }) {
     try {
-      const result = await this.pool.query('SELECT * FROM "Karyawan"');
-      const karyawan = result.rows.map(
-        (karyawan) =>
-          new Karyawan(
-            karyawan.id,
-            karyawan.nama,
-            karyawan.posisi,
-            karyawan.tanggal_mulai,
-            karyawan.nomor_telepon,
-            karyawan.gaji
-          )
-      );
-      return karyawan;
+      let query = 'SELECT * FROM "Karyawan"';
+
+      if (search) {
+        query += ` WHERE nama ILIKE '%${search}%' OR posisi ILIKE '%${search}%' OR nomor_telepon ILIKE '%${search}%' OR gaji::text ILIKE '%${search}%'`;
+      }
+
+      if (gaji === 'ASC') {
+        query += ' ORDER BY gaji ASC';
+      } else if (gaji === 'DESC') {
+        query += ' ORDER BY gaji DESC';
+      }
+
+      if (nama === 'ASC') {
+        query += ' ORDER BY nama ASC';
+      } else if (nama === 'DESC') {
+        query += ' ORDER BY nama DESC';
+      }
+
+      const { rows } = await this.pool.query(query);
+      return rows;
     } catch (error) {
       throw error;
     }

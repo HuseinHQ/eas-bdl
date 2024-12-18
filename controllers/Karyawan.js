@@ -4,9 +4,10 @@ const Karyawan = require('../models/Karyawan');
 
 class KaryawanController {
   static async listPage(req, res) {
+    const { gaji, nama, search = '' } = req.query;
     try {
-      const karyawan = await Karyawan.getAll();
-      res.render('karyawan', { karyawan, formatRupiah, formatDate });
+      const karyawan = await Karyawan.getAll({ gaji, nama, search });
+      res.render('karyawan', { karyawan, gaji, nama, search, formatRupiah, formatDate });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -45,17 +46,27 @@ class KaryawanController {
   }
 
   static async editKaryawan(req, res) {
-    const { id, tanggal_mulai, nama, nomor_telepon, gaji, posisi } = req.body;
+    const { id } = req.params;
+    const { tanggal_mulai, nama, nomor_telepon, gaji, posisi } = req.body;
     try {
-      await Karyawan.update(id, { nama, tanggal_mulai, nomor_telepon, gaji, posisi });
+      await Karyawan.update(id, { nama, tanggal_mulai: new Date(tanggal_mulai), nomor_telepon, gaji, posisi });
       res.redirect('/karyawan');
     } catch (error) {
       if (error.name === 'error') {
-        console.log(error);
-        res.redirect(`/karyawan/${id}/edit?err=${error.errors}`);
+        res.redirect(`/karyawan/${id}/edit?err=${error.where}`);
       } else {
         res.status(500).json(error);
       }
+    }
+  }
+
+  static async deleteKaryawan(req, res) {
+    const { id } = req.params;
+    try {
+      await Karyawan.delete(id);
+      res.redirect('/karyawan');
+    } catch (error) {
+      res.status(500).json(error);
     }
   }
 }

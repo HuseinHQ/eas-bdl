@@ -12,46 +12,66 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-    <!-- HERO -->
-    <div class="px-3 py-5 text-center bg-danger">
-      <h1 class="display-6 fw-bold text-white">List Karyawan</h1>
-    </div>
+  <body class="d-flex flex-row">
+    <!-- Sidebar -->
+    <%- include('_sidebar', {active: 'karyawan'}) %>
+    <div class="flex-grow-1">
+      <!-- Navbar -->
+      <%- include('_navbar', {title: 'List Karyawan', search, link: '/karyawan'}) %>
 
-    <!-- TABLE -->
-    <div class="container mt-3">
-      <button class="btn btn-primary" onclick="window.location.href='/karyawan/add'">Tambah Karyawan</button>
-      <table class="table mt-3">
-        <thead>
-          <th>Id</th>
-          <th>Nama</th>
-          <th>Posisi</th>
-          <th>Tanggal Mulai</th>
-          <th>Nomor Telepon</th>
-          <th>Gaji</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-          <% karyawan.forEach(item => { %>
-          <tr>
-            <td><%= item.id %></td>
-            <td><%= item.nama %></td>
-            <td><%= item.posisi %></td>
-            <td><%= formatDate(item.tanggal_mulai) %></td>
-            <td><%= item.nomor_telepon %></td>
-            <td><%= formatRupiah(item.gaji) %></td>
-            <td>
-              <button class="btn btn-success" onclick="window.location.href='/karyawan/<%= item.id %>/edit'">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button class="btn btn-danger" onclick="window.location.href='/karyawan/<%= item.id %>/delete'">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <!-- TABLE -->
+      <div class="container mt-3">
+        <button class="btn btn-primary" onclick="window.location.href='/karyawan/add'">Tambah Karyawan</button>
+        <table class="table mt-3">
+          <thead>
+            <th>No</th>
+            <th class="align-middle">
+              Nama
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/karyawan?nama=<%= nama == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+              >
+                <i class="bi <%= nama == 'ASC' ? 'bi-sort-alpha-down' : 'bi-sort-alpha-up' %>"></i>
+              </span>
+            </th>
+            <th>Posisi</th>
+            <th>Tanggal Mulai</th>
+            <th>Nomor Telepon</th>
+            <th class="align-middle">
+              Gaji
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/karyawan?gaji=<%= gaji == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+              >
+                <i class="bi <%= gaji == 'ASC' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up' %>"></i>
+              </span>
+            </th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <% karyawan.forEach((item, index) => { %>
+            <tr>
+              <td class="align-middle"><%= index + 1 %></td>
+              <td class="align-middle"><%= item.nama %></td>
+              <td class="align-middle"><%= item.posisi %></td>
+              <td class="align-middle"><%= formatDate(item.tanggal_mulai) %></td>
+              <td class="align-middle"><%= item.nomor_telepon %></td>
+              <td class="align-middle"><%= formatRupiah(item.gaji) %></td>
+              <td class="align-middle">
+                <button class="btn btn-success" onclick="window.location.href='/karyawan/<%= item.id %>/edit'">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-danger" onclick="window.location.href='/karyawan/<%= item.id %>/delete'">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

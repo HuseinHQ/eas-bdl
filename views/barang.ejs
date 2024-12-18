@@ -12,44 +12,81 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-    <!-- HERO -->
-    <div class="px-3 py-5 text-center bg-danger">
-      <h1 class="display-6 fw-bold text-white">List Barang</h1>
-    </div>
+  <body class="d-flex flex-row">
+    <!-- Sidebar -->
+    <%- include('_sidebar', {active: 'produk'}) %>
+    <!-- Navbar -->
+    <div class="flex-grow-1">
+      <%- include('_navbar', {title: 'List Barang', link: '/barang', search}) %>
 
-    <!-- TABLE -->
-    <div class="container mt-3">
-      <button class="btn btn-primary" onclick="window.location.href='/barang/add'">Tambah Barang</button>
-      <table class="table mt-3 items-center">
-        <thead>
-          <th>Id</th>
-          <th>Nama</th>
-          <th>Kategori</th>
-          <th>Harga</th>
-          <th class="text-center">Stok</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-          <% barang.forEach(item => { %>
-          <tr>
-            <td class="align-middle"><%= item.id %></td>
-            <td class="align-middle"><%= item.nama %></td>
-            <td class="align-middle"><%= item.kategori %></td>
-            <td class="align-middle"><%= formatRupiah(item.harga) %></td>
-            <td class="align-middle text-center"><%= item.stok %></td>
-            <td class="align-middle">
-              <button class="btn btn-success" onclick="window.location.href='/barang/<%= item.id %>/edit'">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button class="btn btn-danger" onclick="window.location.href='/barang/delete/<%= item.id %>'">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <!-- TABLE -->
+      <div class="container mt-3">
+        <button class="btn btn-primary" onclick="window.location.href='/barang/add'">Tambah Barang</button>
+        <table class="table mt-3 items-center">
+          <thead>
+            <th>No</th>
+            <th>
+              Nama
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/barang?nama=<%= nama == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %><%= kategori ? ('&kategori=' + kategori) : '' %>'"
+              >
+                <i class="bi <%= nama == 'ASC' ? 'bi-sort-alpha-down' : 'bi-sort-alpha-up' %>"></i>
+              </span>
+            </th>
+            <th class="d-flex flex-row items-center" style="align-items: flex-end;">
+              <span class="me-2">Kategori</span>
+              <select onchange="window.location.href='/barang?kategori=' + this.value + '<%= search ? `&search=${search}` : `` %>'" class="form-select form-select-sm" style="height: 24px; padding: 1.5px 5px; width: 70%;" aria-label="Default select example">
+                <option value="all" selected>All</option>
+                <% kategoriList.forEach(item => { %>
+                  <option value="<%= item.id %>" <%= kategori == item.id ? 'selected' : '' %>><%= item.nama %></option>
+                <% }) %>
+              </select>
+            </th>
+            <th>
+              Harga
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/barang?harga=<%= harga == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %><%= kategori ? ('&kategori=' + kategori) : '' %>'"
+              >
+                <i class="bi <%= harga == 'ASC' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up' %>"></i>
+              </span>
+            </th>
+            <th>
+              Stok
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/barang?stok=<%= nama == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %><%= kategori ? ('&kategori=' + kategori) : '' %>'"
+              >
+                <i class="bi <%= stok == 'ASC' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up' %>"></i>
+              </span>
+            </th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <% barang.forEach((item, index) => { %>
+            <tr>
+              <td class="align-middle"><%= index+1 %></td>
+              <td class="align-middle"><%= item.nama %></td>
+              <td class="align-middle"><%= item.kategori %></td>
+              <td class="align-middle"><%= formatRupiah(item.harga) %></td>
+              <td class="align-middle text-center"><%= item.stok %></td>
+              <td class="align-middle">
+                <button class="btn btn-success" onclick="window.location.href='/barang/<%= item.id %>/edit'">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-danger" onclick="window.location.href='/barang/<%= item.id %>/delete'">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

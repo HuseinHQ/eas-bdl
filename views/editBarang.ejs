@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Barang</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- HERO -->
+    <div class="px-3 py-5 text-center bg-danger">
+      <h1 class="display-6 fw-bold text-white">Edit Barang</h1>
+    </div>
+
+    <div class="container mt-5">
+      <% if (errors) { %>
+      <div class="alert alert-danger text-danger"><%= errors.split(',').join(', ') %></div>
+      <% } %>
+
+      <form action="/barang/<%= barang.id %>" method="post">
+        <div class="mb-3">
+          <label for="nama">Nama</label>
+          <input value="<%= barang.nama %>" class="form-control" type="text" name="nama" placeholder="Kulkas 2 Pintu" />
+        </div>
+
+        <div class="mb-3">
+          <label for="id_kategori">Kategori</label>
+          <select class="form-select" name="id_kategori">
+            <option selected disabled>-- Select Tag --</option>
+            <% kategori.forEach(item => { %>
+            <option value="<%= item.id %>" <%= barang.id_kategori == item.id ? 'selected' : '' %>><%= item.nama %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="harga">Harga</label>
+          <input value="<%= barang.harga %>" class="form-control" type="number" name="harga" placeholder="4200000" />
+        </div>
+
+        <div class="mb-3">
+          <label for="stok">Stok</label>
+          <input value="<%= barang.stok %>" class="form-control" type="number" name="stok" placeholder="30" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Kirim</button>
+      </form>
+    </div>
+  </body>
+</html>
