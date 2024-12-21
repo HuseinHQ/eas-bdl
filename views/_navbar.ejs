@@ -26,17 +26,19 @@
   const searchInput = document.getElementById('searchInput');
 
   // Add an event listener to the form's submit event
-  form.addEventListener('submit', function (event) {
-    // Prevent the default form submission
-    event.preventDefault();
+  if (searchInput) {
+    form.addEventListener('submit', function (event) {
+      // Prevent the default form submission
+      event.preventDefault();
 
-    // Get the current URL
-    const currentURL = window.location.href.split('?')[0]; // Removes existing query params
+      // Get the current URL
+      const currentURL = window.location.href.split('?')[0]; // Removes existing query params
 
-    // Get the search input value
-    const searchQuery = searchInput.value;
+      // Get the search input value
+      const searchQuery = searchInput.value;
 
-    // Redirect to the URL with the search query appended
-    window.location.href = `${currentURL}?search=${encodeURIComponent(searchQuery)}`;
-  });
+      // Redirect to the URL with the search query appended
+      window.location.href = `${currentURL}?search=${encodeURIComponent(searchQuery)}`;
+    });
+  }
 </script>

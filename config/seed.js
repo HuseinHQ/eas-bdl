@@ -70,12 +70,12 @@ pool.query(queryKaryawans, (err) => {
             console.log('SUCCESS INSERT INTO BARANG');
 
             pool.query(queryTransaksis, (err) => {
-              if (err) console.log('FAILED INSERT INTO TRANSAKSI');
+              if (err) console.log('FAILED INSERT INTO TRANSAKSI', err);
               else {
                 console.log('SUCCESS INSERT INTO TRANSAKSI');
 
                 pool.query(queryDetailTransaksis, (err) => {
-                  if (err) console.log('FAILED INSERT INTO DETAIL TRANSAKSI');
+                  if (err) console.log('FAILED INSERT INTO DETAIL TRANSAKSI', err);
                   else {
                     console.log('SUCCESS INSERT INTO DETAIL TRANSAKSI');
                     pool.end();

@@ -4,11 +4,287 @@
     "id_karyawan": 1
   },
   {
-    "tanggal": "2024-01-02",
+    "tanggal": "2024-01-05",
     "id_karyawan": 2
   },
   {
-    "tanggal": "2024-01-03",
+    "tanggal": "2024-01-10",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-01-15",
     "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-01-20",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-01-25",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-02-01",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-02-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-02-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-02-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-02-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-03-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-03-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-03-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-03-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-03-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-03-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-04-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-04-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-04-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-04-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-04-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-04-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-05-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-05-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-05-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-05-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-05-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-05-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-06-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-06-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-06-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-06-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-06-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-06-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-07-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-07-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-07-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-07-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-07-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-07-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-08-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-08-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-08-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-08-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-08-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-08-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-09-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-09-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-09-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-09-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-09-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-09-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-10-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-10-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-10-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-10-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-10-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-10-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-11-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-11-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-11-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-11-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-11-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-11-25",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-12-01",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-12-05",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-12-10",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-12-15",
+    "id_karyawan": 3
+  },
+  {
+    "tanggal": "2024-12-20",
+    "id_karyawan": 1
+  },
+  {
+    "tanggal": "2024-12-21",
+    "id_karyawan": 2
+  },
+  {
+    "tanggal": "2024-12-21 12:00:00",
+    "id_karyawan": 2
   }
 ]

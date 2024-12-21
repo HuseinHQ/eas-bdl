@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shirt List</title>
+    <title>Riwayat Transaksi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,7 +16,56 @@
   <body class="d-flex flex-row">
     <!-- Sidebar -->
     <%- include('_sidebar', {active: 'transaksi'}) %>
-    <!-- Navbar -->
-    <div class="flex-grow-1"><%- include('_navbar', {title: 'Riwayat Transaksi', link: '/transaksi'}) %></div>
+
+    <div class="flex-grow-1">
+      <!-- Navbar -->
+      <%- include('_navbar', {title: 'Riwayat Transaksi', link: '/transaksi'}) %>
+      <!-- TABLE -->
+      <div class="container mt-3">
+        <button class="btn btn-primary" onclick="window.location.href='/transaksi/add'">Tambah Transaksi</button>
+        <table class="table mt-3">
+          <thead>
+            <th>No</th>
+            <th class="align-middle">
+              Tanggal Transaksi
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/transaksi?tanggal=<%= tanggal == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+              >
+                <i class="bi <%= tanggal == 'ASC' ? 'bi-sort-down' : 'bi-sort-up' %>"></i>
+              </span>
+            </th>
+            <th>Karyawan Terlibhat</th>
+            <th class="align-middle">
+              Total Harga
+              <span
+                class="ms-2"
+                style="cursor: pointer"
+                onclick="window.location.href='/transaksi?total_harga=<%= total_harga == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+              >
+                <i class="bi <%= total_harga == 'ASC' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up' %>"></i>
+              </span>
+            </th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <% transaksi.forEach((item, index) => { %>
+            <tr>
+              <td class="align-middle"><%= index + 1 %></td>
+              <td class="align-middle"><%= formatDate(item.tanggal) %></td>
+              <td class="align-middle"><%= item.nama_karyawan %></td>
+              <td class="align-middle"><%= formatRupiah(item.total_harga) %></td>
+              <td class="align-middle">
+                <button class="btn btn-secondary" onclick="window.location.href='/transaksi/<%= item.id %>'">
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
