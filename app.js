@@ -27,5 +27,6 @@ app.post('/barang/:id', BarangController.editBarang);
 app.get('/barang/:id/delete', BarangController.deleteBarang);
 
 app.get('/transaksi', TransaksiController.listPage);
+app.get('/transaksi/:id', TransaksiController.detailPage);
 
 app.listen(port, () => console.log(`app listen to localhost:${port}`));

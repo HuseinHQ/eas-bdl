@@ -22,7 +22,6 @@
       <%- include('_navbar', {title: 'Riwayat Transaksi', link: '/transaksi'}) %>
       <!-- TABLE -->
       <div class="container mt-3">
-        <button class="btn btn-primary" onclick="window.location.href='/transaksi/add'">Tambah Transaksi</button>
         <table class="table mt-3">
           <thead>
             <th>No</th>
@@ -31,7 +30,7 @@
               <span
                 class="ms-2"
                 style="cursor: pointer"
-                onclick="window.location.href='/transaksi?tanggal=<%= tanggal == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+                onclick="window.location.href='/transaksi?tanggal=<%= tanggal == 'ASC' ? 'DESC' : 'ASC' %><%= page ? ('&page=' + page) : '' %>'"
               >
                 <i class="bi <%= tanggal == 'ASC' ? 'bi-sort-down' : 'bi-sort-up' %>"></i>
               </span>
@@ -42,7 +41,7 @@
               <span
                 class="ms-2"
                 style="cursor: pointer"
-                onclick="window.location.href='/transaksi?total_harga=<%= total_harga == 'ASC' ? 'DESC' : 'ASC' %><%= search ? ('&search=' + search) : '' %>'"
+                onclick="window.location.href='/transaksi?total_harga=<%= total_harga == 'ASC' ? 'DESC' : 'ASC' %><%= page ? ('&page=' + page) : '' %>'"
               >
                 <i class="bi <%= total_harga == 'ASC' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up' %>"></i>
               </span>
@@ -65,6 +64,37 @@
             <% }) %>
           </tbody>
         </table>
+
+        <nav aria-label="pagination" class="mt-5">
+          <ul class="pagination justify-content-center">
+            <li class="page-item <%= pagination.isFirstPage ? 'disabled' : '' %>">
+              <a
+                class="page-link"
+                href="<%= !pagination.isFirstPage ? `?page=${pagination.page - 1}${tanggal ? `&tanggal=${tanggal}` : ''}${total_harga ? `&total_harga=${total_harga}` : ''}` : '#' %>"
+                tabindex="-1"
+                >Previous</a
+              >
+            </li>
+
+            <% for (let i = 1; i <= pagination.totalPage; i++) { %>
+            <li class="page-item <%= pagination.page == i ? 'active' : '' %>">
+              <a
+                class="page-link"
+                href="?page=<%= i %><%= tanggal ? `&tanggal=${tanggal}` : '' %><%= total_harga ? `&total_harga=${total_harga}` : '' %>"
+                ><%= i %></a
+              >
+            </li>
+            <% } %>
+
+            <li class="page-item <%= pagination.isLastPage ? 'disabled' : '' %>">
+              <a
+                class="page-link"
+                href="<%= !pagination.isLastPage ? `?page=${pagination.page + 1}${tanggal ? `&tanggal=${tanggal}` : ''}${total_harga ? `&total_harga=${total_harga}` : ''}` : '#' %>"
+                >Next</a
+              >
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </body>

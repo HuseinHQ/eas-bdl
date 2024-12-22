@@ -3,7 +3,9 @@ const pool = require('../config/connection');
 class Transaksi {
   static pool = pool;
 
-  static async getAll({ limit = 10, offset = 0, tanggal, total_harga } = {}) {
+  static async getAll({ limit = 10, page = 1, tanggal, total_harga } = {}) {
+    const offset = (page - 1) * limit;
+
     const orderQuery = `ORDER BY ${tanggal ? 'sub.tanggal' : 'sub.total_harga'} ${
       tanggal && tanggal === 'DESC'
         ? 'DESC'
@@ -15,6 +17,22 @@ class Transaksi {
     }`;
 
     try {
+      const countQuery = `
+        SELECT COUNT(*) AS total
+        FROM (
+            SELECT t.id
+            FROM "Transaksi" t
+            JOIN "Karyawan" k ON t.id_karyawan = k.id
+            JOIN "DetailTransaksi" dt ON dt.id_transaksi = t.id
+            JOIN "Barang" b ON b.id = dt.id_barang
+            GROUP BY t.id, k.nama
+        ) sub
+      `;
+
+      const countResult = await this.pool.query(countQuery);
+      const totalRecords = parseInt(countResult.rows[0].total, 10);
+      const totalPage = Math.ceil(totalRecords / limit);
+
       const query = `
         SELECT sub.* 
         FROM (
@@ -32,14 +50,21 @@ class Transaksi {
         OFFSET $2
       `;
 
-      console.log(query);
       const { rows } = await this.pool.query(query, [limit, offset]);
 
       const result = rows.map((row) => ({
         ...row,
       }));
 
-      return result;
+      return {
+        data: result,
+        pagination: {
+          page,
+          isLastPage: page >= totalPage,
+          isFirstPage: page <= 1,
+          totalPage,
+        },
+      };
     } catch (error) {
       throw error;
     }
@@ -106,6 +131,56 @@ class Transaksi {
 
       // Return the results for all periods
       return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getById(id) {
+    try {
+      const query = `
+      SELECT 
+        t.id AS transaksi_id,
+        t.tanggal,
+        k.id AS karyawan_id,
+        k.nama AS nama_karyawan,
+        k.posisi AS jabatan_karyawan,
+        dt.jumlah_barang,
+        b.nama AS nama_barang,
+        b.harga AS harga_barang,
+        (b.harga * dt.jumlah_barang)::integer AS total_per_item,
+        SUM(b.harga * dt.jumlah_barang) OVER (PARTITION BY t.id)::integer AS total_harga
+      FROM "Transaksi" t
+      JOIN "Karyawan" k ON t.id_karyawan = k.id
+      JOIN "DetailTransaksi" dt ON dt.id_transaksi = t.id
+      JOIN "Barang" b ON b.id = dt.id_barang
+      WHERE t.id = $1
+    `;
+
+      const result = await this.pool.query(query, [id]);
+
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      const transaksi = {
+        id: result.rows[0].transaksi_id,
+        tanggal: result.rows[0].tanggal,
+        karyawan: {
+          id: result.rows[0].karyawan_id,
+          nama: result.rows[0].nama_karyawan,
+          posisi: result.rows[0].jabatan_karyawan,
+        },
+        detail: result.rows.map((row) => ({
+          nama_barang: row.nama_barang,
+          jumlah_barang: row.jumlah_barang,
+          harga_barang: row.harga_barang,
+          total: row.total_per_item,
+        })),
+        total_harga: result.rows[0].total_harga,
+      };
+
+      return transaksi;
     } catch (error) {
       throw error;
     }

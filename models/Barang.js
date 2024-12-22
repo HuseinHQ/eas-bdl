@@ -78,6 +78,35 @@ class Barang {
       throw error;
     }
   }
+
+  static async mostSold() {
+    try {
+      const query = `
+            SELECT 
+        b.id,
+        b.nama,
+        b.harga,
+        total_penjualan
+      FROM 
+        "Barang" b
+      JOIN (
+        SELECT 
+          dt.id_barang,
+          SUM(dt.jumlah_barang) AS total_penjualan
+        FROM 
+          "DetailTransaksi" dt
+        GROUP BY 
+          dt.id_barang
+      ) sub ON b.id = sub.id_barang
+      ORDER BY 
+        total_penjualan DESC;
+      `;
+      const { rows } = await this.pool.query(query);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = Barang;
